@@ -1,0 +1,86 @@
+File: activity_main.xml
+
+<?xml version="1.0" encoding="utf-8"?>  
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"  
+    xmlns:app="http://schemas.android.com/apk/res-auto"  
+    xmlns:tools="http://schemas.android.com/tools"  
+    android:layout_width="match_parent"  
+    android:layout_height="match_parent"  
+    tools:context="example.javatpoint.com.customtoast.MainActivity">  
+  
+    <TextView  
+        android:layout_width="wrap_content"  
+        android:layout_height="wrap_content"  
+        android:text="Hello World!"  
+        app:layout_constraintBottom_toBottomOf="parent"  
+        app:layout_constraintLeft_toLeftOf="parent"  
+        app:layout_constraintRight_toRightOf="parent"  
+        app:layout_constraintTop_toTopOf="parent" />  
+  
+</android.support.constraint.ConstraintLayout>  
+
+
+ 
+customtoast.xml
+
+Create another xml file inside the layout directory. Here we are having ImageView and TextView in this xml file.
+
+File: customtoast.xml
+<?xml version="1.0" encoding="utf-8"?>  
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"  
+    android:layout_width="match_parent"  
+    android:layout_height="match_parent"  
+    android:id="@+id/custom_toast_layout"  
+    android:orientation="vertical"  
+    android:background="#F14E23"  
+    >  
+  
+    <ImageView  
+        android:id="@+id/custom_toast_image"  
+        android:layout_width="wrap_content"  
+        android:layout_height="wrap_content"  
+        android:contentDescription="Hello world"  
+        android:src="@drawable/jtp_logo"/>  
+  
+    <TextView  
+        android:id="@+id/custom_toast_message"  
+        android:layout_width="wrap_content"  
+        android:layout_height="wrap_content"  
+        android:contentDescription="To"  
+        android:text="JavaTpoint custom Toast" />  
+</LinearLayout>  
+Activity class
+
+Now write the code to display the custom toast.
+
+File: MainActivity.java
+package example.javatpoint.com.customtoast;  
+  
+import android.support.v7.app.AppCompatActivity;  
+import android.os.Bundle;  
+import android.view.Gravity;  
+import android.view.LayoutInflater;  
+import android.view.View;  
+import android.view.ViewGroup;  
+import android.widget.Toast;  
+  
+public class MainActivity extends AppCompatActivity {  
+  
+    @Override  
+    protected void onCreate(Bundle savedInstanceState) {  
+        super.onCreate(savedInstanceState);  
+        setContentView(R.layout.activity_main);  
+  
+        //Creating the LayoutInflater instance  
+        LayoutInflater li = getLayoutInflater();  
+        //Getting the View object as defined in the customtoast.xml file  
+        View layout = li.inflate(R.layout.customtoast,(ViewGroup) findViewById(R.id.custom_toast_layout));  
+  
+        //Creating the Toast object  
+        Toast toast = new Toast(getApplicationContext());  
+        toast.setDuration(Toast.LENGTH_SHORT);  
+        toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);  
+        toast.setView(layout);//setting the view of custom toast layout  
+        toast.show();  
+    }  
+}  
